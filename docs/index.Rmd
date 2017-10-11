@@ -5,10 +5,12 @@ author: "Liming Wang"
 date: '`r format(Sys.Date(), "%B %d, %Y")`'
 output:
   xaringan::moon_reader:
-    css: "resources/example.css"
-    seal: yes
+    lib_dir: libs
     nature:
       highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      
 ---
 
 ```{r setup, include=FALSE}
@@ -39,43 +41,84 @@ background-size: 100%
 
 ---
 
-# 
-
-```{r, out.width = "100%"}
-knitr::include_graphics("resources/wired_end_of_theory.png")
-```
-
----
-
 # Machine Learning
 - The hype
 - The definition
 
 ---
 
-# Machine Learning Methods
+background-image: url("resources/ml_map.png")
+background-size: 100%
+class: center, bottom
 
-```{r, out.width = "100%"}
-knitr::include_graphics("resources/ml_map.png")
-```
-.center[]
-
----
-
-# Hal Varian's take
+## Machine Learning Algorithms
 
 ---
 
 # Two Case Studies
 
-- Imputation of missing data
+- Imputation of missing data for travel surveys
 - Predictive models of travel behavior
 
 ---
 
-# Imputation of Missing Data for National Household Travel Survey (NHTS)
+# Case I: Imputation of Missing Data 
 
-- Missing data issue is prevalent in travel surveys
+National Household Travel Survey (NHTS), 2001
+<!-- missingness -->
+```{r}
+```
+
+---
+
+# Multiple Imputation by Chained Equations
+
+```{r}
+knitr::include_graphics("resources/mice1.png")
+```
+Source: van Buuren, Stef and Karin Groothuis-Oudshoorn, 2011. mice: Multivariate Imputation by Chained Equations in R, Journal of Statistical Software, Vol 45 (3).
+
+---
+
+# Results
+
+```{r}
+
+```
+
+---
+
+# Case II: Travel Behavior Modeling
+
+$$\text{VMT}_h \sim f(\text{SES}_h, \text{regional characteristics}, \text{built environment})$$
+Data Sources:
+
+- 2009 NHTS for household's SES, travel outcome (VMT);
+- EPA's Smart Location Database (for blockgroup level 5D built environment measures);
+- Highway Performance Measure System for regionwide roadway information;
+- National Transit Database for regionwide transit supply.
+
+150,000 households with more than 200 independent variables (before considering non-linear transformation or interaction between variables)
+
+---
+
+# VMT models
+
+- Statistical Models
+   - linear regression
+   - non-linear regression (transformed dependent variable)
+   - tobit model
+   - hurdle model
+   - two step model
+- Machine learning algorithms
+   - Random Forest
+   - Gradient Tree Boosting
+   - Deep nureal network
+
+---
+
+# Cross Validation Results
+
 
 ---
 
@@ -83,6 +126,10 @@ knitr::include_graphics("resources/ml_map.png")
 
 - Value?
 - Computation intensive
+
+---
+
+# Discussion
 
 ---
 

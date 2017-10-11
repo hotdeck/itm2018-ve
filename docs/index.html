@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="author" content="Liming Wang" />
     <meta name="date" content="2017-10-11" />
-    <link rel="stylesheet" href="resources/example.css" type="text/css" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/fonts.css" rel="stylesheet" />
   </head>
   <body>
     <textarea id="source">
@@ -37,15 +38,8 @@ class: center, middle, inverse, title-slide
 
 background-image: url("resources/wired_end_of_theory.png")
 background-size: 100%
-background-position: 50% 50%
 
 # 
-
----
-
-# 
-
-&lt;img src="resources/wired_end_of_theory.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -55,27 +49,64 @@ background-position: 50% 50%
 
 ---
 
-# Machine Learning Methods
+background-image: url("resources/ml_map.png")
+background-size: 100%
+class: center, bottom
 
-&lt;img src="resources/ml_map.png" width="100%" style="display: block; margin: auto;" /&gt;
-.center[]
-
----
-
-# Hal Varian's take
+## Machine Learning Algorithms
 
 ---
 
 # Two Case Studies
 
-- Imputation of missing data
+- Imputation of missing data for travel surveys
 - Predictive models of travel behavior
 
 ---
 
-# Imputation of Missing Data for National Household Travel Survey (NHTS)
+# Case I: Imputation of Missing Data 
 
-- Missing data issue is prevalent in travel surveys
+National Household Travel Survey (NHTS), 2001
+&lt;!-- missingness --&gt;
+
+
+---
+
+# Multiple Imputation by Chained Equations
+&lt;img src="resources/mice1.png" width="1424" style="display: block; margin: auto;" /&gt;
+Source: van Buuren, Stef and Karin Groothuis-Oudshoorn, 2011. mice: Multivariate Imputation by Chained Equations in R, Journal of Statistical Software, Vol 45 (3).
+
+---
+
+# Case II: Travel Behavior Modeling
+
+`$$\text{VMT} \sim f(\text{SES}, \text{regional characteristics}, \text{built environment})$$`
+Datasets:
+
+- 2009 NHTS for household's SES, travel outcome (VMT);
+- EPA's Smart Location Database (for blockgroup level 5D built environment measures);
+- Highway Performance Measure System for regionwide roadway information;
+- National Transit Database for regionwide transit supply.
+
+---
+
+# VMT models
+
+- Statistical Models
+   - linear regression
+   - non-linear regression (transformed)
+   - tobit
+   - hurdle model
+   - two step model
+- Machine learning algorithms
+   - Random Forest
+   - Gradient Boost Tree
+   - Deep nureal network
+
+---
+
+# Cross Validation Results
+
 
 ---
 
@@ -86,11 +117,17 @@ background-position: 50% 50%
 
 ---
 
+# Discussion
+
+---
+
 # Acknowledgements
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github"
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
 (function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
