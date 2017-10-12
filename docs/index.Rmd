@@ -30,8 +30,20 @@ options(repos="https://cran.rstudio.com")
 
 ---
 
-# Generative vs Descriminative Analysis
+# Statistical Modeling vs Machine Learning
 
+Two cultures of developing models:
+- Statistical models ("the data modeling"): Assuming a data generation model and use data and hypothesis testing framework to recover parameters of the data generation process;
+- Machine learning ("the algorithmic modeling"): With no assumption of data generation process, use computer algorithms for pattern recognition and data-driven predictions-making
+
+![Breiman2003](resources/Breiman2003.png)
+
+<center>
+
+Statistical Models &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Machine Learning
+</center>
+
+Source: Breiman, 2001
 ---
 
 background-image: url("resources/wired_end_of_theory.png")

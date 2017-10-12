@@ -4,7 +4,7 @@
     <title>Statistical Models vs Machine Learning: Should Planners Care?</title>
     <meta charset="utf-8">
     <meta name="author" content="Liming Wang" />
-    <meta name="date" content="2017-10-11" />
+    <meta name="date" content="2017-10-12" />
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/fonts.css" rel="stylesheet" />
   </head>
@@ -15,7 +15,7 @@ class: center, middle, inverse, title-slide
 # Statistical Models vs Machine Learning: Should Planners Care?
 ## A Discussion with Two Case Studies
 ### Liming Wang
-### October 11, 2017
+### October 12, 2017
 
 ---
 
@@ -32,8 +32,20 @@ class: center, middle, inverse, title-slide
 
 ---
 
-# Generative vs Descriminative Analysis
+# Statistical Modeling vs Machine Learning
 
+Two cultures of developing models:
+- Statistical models ("the data modeling"): Assuming a data generation model and use data and hypothesis testing framework to recover parameters of the data generation process;
+- Machine learning ("the algorithmic modeling"): With no assumption of data generation process, use computer algorithms for pattern recognition and data-driven predictions-making
+
+![Breiman2003](resources/Breiman2003.png)
+
+&lt;center&gt;
+
+Statistical Models &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Machine Learning
+&lt;/center&gt;
+
+Source: Breiman, 2001
 ---
 
 background-image: url("resources/wired_end_of_theory.png")
@@ -73,20 +85,29 @@ National Household Travel Survey (NHTS), 2001
 ---
 
 # Multiple Imputation by Chained Equations
+
 &lt;img src="resources/mice1.png" width="1424" style="display: block; margin: auto;" /&gt;
 Source: van Buuren, Stef and Karin Groothuis-Oudshoorn, 2011. mice: Multivariate Imputation by Chained Equations in R, Journal of Statistical Software, Vol 45 (3).
 
 ---
 
+# Results
+
+
+
+---
+
 # Case II: Travel Behavior Modeling
 
-`$$\text{VMT} \sim f(\text{SES}, \text{regional characteristics}, \text{built environment})$$`
-Datasets:
+`$$\text{VMT}_h \sim f(\text{SES}_h, \text{regional characteristics}, \text{built environment})$$`
+Data Sources:
 
 - 2009 NHTS for household's SES, travel outcome (VMT);
 - EPA's Smart Location Database (for blockgroup level 5D built environment measures);
 - Highway Performance Measure System for regionwide roadway information;
 - National Transit Database for regionwide transit supply.
+
+150,000 households with more than 200 independent variables (before considering non-linear transformation or interaction between variables)
 
 ---
 
@@ -94,13 +115,13 @@ Datasets:
 
 - Statistical Models
    - linear regression
-   - non-linear regression (transformed)
-   - tobit
+   - non-linear regression (transformed dependent variable)
+   - tobit model
    - hurdle model
    - two step model
 - Machine learning algorithms
    - Random Forest
-   - Gradient Boost Tree
+   - Gradient Tree Boosting
    - Deep nureal network
 
 ---
