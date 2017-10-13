@@ -13,7 +13,7 @@
 class: center, middle, inverse, title-slide
 
 # Statistical Models vs Machine Learning: Should Planners Care?
-## A Discussion with Two Case Studies
+## Discussion with Two Case Studies
 ### Liming Wang
 ### October 12, 2017
 
@@ -34,53 +34,72 @@ class: center, middle, inverse, title-slide
 
 # Statistical Modeling vs Machine Learning
 
-Two cultures of developing models:
-- Statistical models ("the data modeling"): Assuming a data generation model and use data and hypothesis testing framework to recover parameters of the data generation process;
-- Machine learning ("the algorithmic modeling"): With no assumption of data generation process, use computer algorithms for pattern recognition and data-driven predictions-making
+Two cultures of developing models (Breiman, 2001):
 
-![Breiman2003](resources/Breiman2003.png)
+.pull-left[
+![Breiman2003](resources/Breiman2001_data-modeling.png)
 
-&lt;center&gt;
+**Statistical models** ("the data modeling"): Assuming a data generation model and use data and hypothesis testing framework to recover parameters of the data generation process;
+]
 
-Statistical Models &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Machine Learning
-&lt;/center&gt;
+.pull-right[
+![Breiman2003](resources/Breiman2001_algo-modeling.png)
 
-Source: Breiman, 2001
+**Machine learning** ("algorithmic modeling"): With no assumption of data generation process, use computer algorithms for pattern recognition and data-driven predictions-making
+
+]
+
 ---
 
 background-image: url("resources/wired_end_of_theory.png")
 background-size: 100%
 
-# 
-
 ---
 
-# Machine Learning
-- The hype
-- The definition
+# The Case for Machine Learning
+
+- Assumption/theory of the data generation process may be wrong
+- Competing data generation models may give different pictures of the relation between the predictor and response variables;
+- Changing landscape of data availability
+   - Curse of dimensionality
+   - Easy to detect a significant correlation with large sample size
+   - Increasingly models involving data of the population instead of a sample
+- More open source ML software/packages and powerful/cheaper computers/servers
 
 ---
-
-background-image: url("resources/ml_map.png")
+&lt;!-- background-image: url("resources/Olson2018.png") --&gt;
+background-image: url("resources/machine-learning-cheet-sheet.png")
 background-size: 100%
 class: center, bottom
 
-## Machine Learning Algorithms
+Source: SAS, available at https://blogs.sas.com/content/subconsciousmusings/2017/04/12/machine-learning-algorithm-use/
+---
+
+background-image: url("resources/Olson2018.png")
+background-size: 80%
+class: center, bottom
+
+Benchmarking Machine Learning Algorithms
+
+Source: Randal S. Olson and William La Cava et al., 2018.
 
 ---
 
 # Two Case Studies
 
-- Imputation of missing data for travel surveys
+- Imputation of missing data in travel surveys
 - Predictive models of travel behavior
 
 ---
 
 # Case I: Imputation of Missing Data 
 
-National Household Travel Survey (NHTS), 2001
+Annual Vehile Miles Travelled information in the 2001 National Household Travel Survey (NHTS)
 &lt;!-- missingness --&gt;
 
+&lt;img src="index_files/figure-html/unnamed-chunk-1-1.svg" style="display: block; margin: auto;" /&gt;
+
+Only 12% (17037 out of 139382) observations are complete.
 
 ---
 
@@ -91,15 +110,45 @@ Source: van Buuren, Stef and Karin Groothuis-Oudshoorn, 2011. mice: Multivariate
 
 ---
 
-# Results
+# Imputation Results (1)
 
+**Validation**: randomly set 10% of values to missing, impute them and compare with actual values
 
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Variable &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Normalized RMSE &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; ANNMILES (Self reported annual VMT) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 31.8240 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; ANNUALZD (VMT annualized from two Odmeter readings) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 22.2640 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; HHFAMINC (Family income) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0475 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+background-image: url("resources/mice_imp_demo.png")
+background-size: 55%
+
+**Imputation Results (2)**: Comparing regression results without and with multiple imputation
 
 ---
 
 # Case II: Travel Behavior Modeling
 
-`$$\text{VMT}_h \sim f(\text{SES}_h, \text{regional characteristics}, \text{built environment})$$`
+`$$\text{VMT}_h \leftarrow (\text{SES}_h, \text{regional characteristics}, \text{built environment})$$`
 Data Sources:
 
 - 2009 NHTS for household's SES, travel outcome (VMT);
@@ -107,7 +156,7 @@ Data Sources:
 - Highway Performance Measure System for regionwide roadway information;
 - National Transit Database for regionwide transit supply.
 
-150,000 households with more than 200 independent variables (before considering non-linear transformation or interaction between variables)
+150,000 households with more than 180 independent variables (before considering non-linear transformation or interaction between variables)
 
 ---
 
@@ -117,32 +166,43 @@ Data Sources:
    - linear regression
    - non-linear regression (transformed dependent variable)
    - tobit model
-   - hurdle model
-   - two step model
+   - zero-inflated negative binomial model
 - Machine learning algorithms
    - Random Forest
    - Gradient Tree Boosting
    - Deep nureal network
-
+   
 ---
 
 # Cross Validation Results
 
+- Dependent variable is household VMT on the day of survey
+- Data are randomly partitioned into 5 parts for a 5-fold cross-validation
+
+&lt;img src="index_files/figure-html/unnamed-chunk-4-1.svg" style="display: block; margin: auto;" /&gt;
 
 ---
 
-# Assessment
+# Conclusion and Discussion
 
-- Value?
-- Computation intensive
+**Conclusions**:
+- Some tasks, such as multivariate data imputation, are hard or impossible to do with statistical models but possible with machine learning, 
+- Growing modeling complexity adds challenges to statistical models, machine learning has an advantage in complex models
+- If you're developing models for prediction, there are few reasons not to look into machine learning algorithms
 
----
+**Challenges**
 
-# Discussion
+- Combining machine learning skills with the domain knowledge of planning; 
+- Train planning students with machine learning skills
+- Computation intensity &amp; access to computer resources
 
 ---
 
 # Acknowledgements
+
+- Oregon Department of Transportation (SPR 788) 
+- National Institute for Transportation and Communities (NITC-881)
+- Portland Institute for Computational Science and its resources acquired using NSF Grant #DMS 1624776 and ARO Grant #W911NF-16-1-0307
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
