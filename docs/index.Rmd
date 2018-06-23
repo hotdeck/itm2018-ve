@@ -2,7 +2,7 @@
 title: "Development of a MultiModal Travel Demand Module for the Regional Strategic Planning Model tool"
 subtitle: "Experience of contributing to the VisionEval project"
 author: "Liming Wang, Huajie Yang, Brian Gregor, and Tara Weidner"
-date: '`r format(Sys.Date(), "%B %d, %Y")`'
+date: '6/25/2018'
 output:
   xaringan::moon_reader:
     lib_dir: libs
