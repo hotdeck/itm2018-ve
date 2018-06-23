@@ -1,185 +1,154 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Statistical Models vs Machine Learning</title>
+    <title>Development of a MultiModal Travel Demand Module for the Regional Strategic Planning Model tool</title>
     <meta charset="utf-8">
-    <meta name="author" content="Liming Wang" />
-    <meta name="date" content="2017-10-13" />
+    <meta name="author" content="Liming Wang, Huajie Yang, Brian Gregor, and Tara Weidner" />
+    <meta name="date" content="2018-06-22" />
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
-    <link href="libs/remark-css-0.0.1/fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Statistical Models vs Machine Learning
-## A Reflection with Two Case Studies
-### Liming Wang
-### October 13, 2017
+# Development of a MultiModal Travel Demand Module for the Regional Strategic Planning Model tool
+## Experience of contributing to the VisionEval project
+### Liming Wang, Huajie Yang, Brian Gregor, and Tara Weidner
+### June 22, 2018
 
 ---
 
 
 
 
-# About me
+# Outline
 
-- Currently an assistant professor of Urban Studies and Planning at Portland State University
-- Did dissertation research on urban simulation models (with Paul Waddell)
-- Worked as a developer for UrbanSim for a number of years
-- Research interests on land use - transportation interaction (LUTI) models
-- Never had formal computer science training/background
-
----
-
-# Statistical Modeling vs Machine Learning
-
-Two cultures of developing models (Breiman, 2001):
-
-.pull-left[
-![Breiman2003](resources/Breiman2001_data-modeling.png)
-
-**Statistical models** ("the data modeling"): Assuming a data generation model and use data and hypothesis testing framework to recover parameters of the data generation process;
-]
-
-.pull-right[
-![Breiman2003](resources/Breiman2001_algo-modeling.png)
-
-**Machine learning** ("algorithmic modeling"): With no assumption of data generation process, use computer algorithms for pattern recognition and data-driven predictions-making
-
-]
+- The VETravelDemandMM module
+- Innovations
+- The process of contributing to VisionEval 
+- Reflections
 
 ---
 
-background-image: url("resources/wired_end_of_theory.png")
+# The VETravelDemandMM module
+
+- Started in 2015 as an Oregon DOT SPR project to better capture mode shifting for the Regional Strategic Planning Model (RSPM) tool to
+    - Incorporate non-auto modes into a mode choice module for the RSPM tool;
+    - Explore and utilize the best data sources available for model estimation;
+    - Leverage this effort for additional research and expand the scope to include emerging modes (bike sharing, car sharing, shared automated vehicles).
+
+---
+
+background-image: url("resources/RSPM-flow-chart_v4.png")
 background-size: 100%
 
----
-
-# Challenges to Statistical Models
-
-Or the case for machine learning:
-
-- Assumption/theory of the data generation process may be wrong
-- Competing data generation models may give different pictures of the relation between the predictors and response variable;
-- Changing landscape of data availability
-   - Curse of dimensionality
-   - Easy to detect significant correlations with large sample size
-   - Increasingly models involving data of the population instead of a sample
-   - Missing data issue
+&lt;!-- ![RSPM-flowchart](resources/RSPM-flow-chart_v4.png) --&gt;
 
 ---
 
-# Two Case Studies
+# The Progress
 
-- Imputation of missing data in travel surveys
-- Models travel outcomes
+- Orginally planned to be implemented for the original RSPM/GreenSTEP (ver 3.5)
+- Modes/models included:
+    - Annual Average Daily Vehicle Models Travelled (VMT) model
+    - Transit trips (frequency and length) and Person Miles Travelled (PMT)
+    - Biking trips and PMT
+    - Walking trips and PMT
+- Products (so far):
+    - Project working papers and report deliverables
+    - A poster presentation at the 2018 TRB annual meeting
+    - A manuscript under review for publication at the Journal of Transport and Land Use
+    
+---
+
+background-image: url("resources/ve-spr788.png")
+background-size: 75%
 
 ---
 
-# Case I: Imputation of Missing Data 
+# Innovations
 
-Annual Vehile Miles Travelled information in the 2001 National Household Travel Survey (NHTS)
-&lt;!-- missingness --&gt;
-
-&lt;img src="index_files/figure-html/unnamed-chunk-1-1.svg" style="display: block; margin: auto;" /&gt;
-
-Only 12% (17037 out of 139382) observations are complete.
-
----
-
-# Multiple Imputation by Chained Equations
-
-&lt;img src="resources/mice1.png" width="1424" style="display: block; margin: auto;" /&gt;
-Source: van Buuren, Stef and Karin Groothuis-Oudshoorn, 2011. mice: Multivariate Imputation by Chained Equations in R, Journal of Statistical Software, Vol 45 (3).
+- Utilizing a novel dataset of highly detailed information of households (2009 NHTS) and built environment (EPA Smart Location Database) with a US nationwide coverage;
+- Modeling annual average daily Vehicle Miles Traveled (AADVMT), instead of the VMT during the day of the survey commonly used in similar models;
+- Use of cross validation in model development to avoid overfitting;
+- Conducting model selection, in addition to variable selection, in the model development process to select the best model structure among a handful of options;
+- Implemented in the popular statistical programming language R as a self-contained package, which contains documents and functions for model (re-)estimation and prediction;
+- The model development process, from data processing, model estimation, validation and testing, to report and document compiling, follows the best practices of reproducible research; results and products derived from our work, including this ITM paper/presentation, is fully reproducible by others (sans confidential data).
 
 ---
 
-# Imputation Results (1)
+# Elasticities
 
-**Validation**: randomly set 10% of values to missing, impute them and compare with actual values
+&lt;!-- I'm not going to show you the usual model estimation results etc here, but just to showcase two examples where I think the new implementation has done a good job --&gt;
 
-&lt;table&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:left;"&gt; Variable &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Normalized RMSE &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; ANNMILES (Self reported annual VMT) &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 31.8240 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; ANNUALZD (VMT annualized from two Odmeter readings) &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 22.2640 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; HHFAMINC (Family income) &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.0475 &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
+![elasticities](resources/elasticity-aadvmt.png)
 
 ---
 
-background-image: url("resources/mice_imp_demo.png")
-background-size: 55%
+background-image: url("resources/validation-vetdm.png")
+background-size: 100%
 
-**Imputation Results (2)**: Comparing linear regression results (y=ANNUALZD) without and with multiple imputation
-
----
-
-# Case II: Travel Behavior Modeling
-
-`$$\text{VMT}_h \leftarrow (\text{SES}_h, \text{regional characteristics}, \text{built environment})$$`
-Data Sources:
-
-- 2009 NHTS for household's SES, travel outcome (VMT);
-- EPA's Smart Location Database (for blockgroup level 5D built environment measures);
-- Highway Performance Measure System for regionwide roadway information;
-- National Transit Database for regionwide transit supply.
-
-150,000 households with more than 180 independent variables (before considering non-linear transformation or interaction between variables)
+# Validation: VETravelDemandMM Predictions
 
 ---
 
-# VMT models
+background-image: url("resources/validation-rspm.png")
+background-size: 68%
 
-- Statistical Models
-   - linear regression
-   - non-linear regression (transformed dependent variable)
-   - tobit model
-   - zero-inflated negative binomial model
-- Machine learning algorithms
-   - Random Forest
-   - Gradient Tree Boosting
-   - Deep nureal network
-   
----
-
-# Cross Validation Results
-
-- Dependent variable is household VMT on the day of survey
-- Data are randomly partitioned into 5 parts for a 5-fold cross-validation
-
-&lt;img src="index_files/figure-html/unnamed-chunk-4-1.svg" style="display: block; margin: auto;" /&gt;
+# Validation: RSPM Predictions
 
 ---
 
-# Conclusion and Discussion
+background-image: url("resources/validation-ohas.png")
+background-size: 100%
 
-**Conclusions**:
-- Some tasks, such as multivariate data imputation, are hard or impossible to do with statistical models but possible with machine learning, 
-- Growing modeling complexity adds challenges to statistical models, machine learning has an advantage in complex models
-- If you're developing models for prediction, there are few reasons not to look into machine learning algorithms
+# Validation: "Observed" OHAS
 
-**Challenges**
+---
 
-- Combining machine learning skills with the domain knowledge of planning; 
-- Train planning students with machine learning skills
-- Computation intensity &amp; access to computer resources
+# VisionEval Framework
+
+- When the project started, VisionEval (formerly RSPM Framework) was still on the drawing board;
+- As VE development picked up steam and materialized, the project team and TAC decided that it made more sense to implement for VE instead;
+- Started swtiching to implement as a VE module package in 12/2016;
+- Amended the Scope of Work to include the contribution review in 02/2017
+
+---
+
+# VETravelDemandMM Implementation
+
+- GitHub Repository: https://github.com/cities-lab/VETravelDemandMM
+- A standard R package with
+    - inst/extdata - external datasets (HPMS, NTD, Place Types etc; 2009 NTHS and SLD are dependencies as separate packages)
+    - data-raw/ - scripts for model estimation; can be adapted for re-estimating models with new data
+    - data/ - estimated R model objects
+    - R/ - implementation of the module
+    - man/ - manuals for functions implemented in the package
+    - vignettes/ - vignettes (documents) for the package, including an introduction document, contribution review and feedback
+    - test/ - tests that are automatically with travis-ci [![Travis-CI Build Status](https://travis-ci.org/cities-lab/VETravelDemandMM.svg)](https://travis-ci.org/cities-lab/VETravelDemandMM)
+
+---
+
+# Contribution Review Process
+
+- [Contribution Review Criteria Check List](https://github.com/gregorbj/VisionEval/wiki/Contribution-Review-Criteria)
+- [Responses to Contribution Review Criteria](https://cities-lab.github.io/VETravelDemandMM/Review.html)
+- [Pull Request](https://github.com/gregorbj/VisionEval/pull/130)
+- [Comments from the Review team](https://github.com/gregorbj/VisionEval/wiki/Example-Review#feedback)
+
+---
+
+# Reflections
+
+- The modular VE framework, along with the design principle, sample modules, extensive documentation and coding style guide, is extremely helpful;
+- Best practices we follow (mostly blessings to our team) and facilitate incorporating our code with the VE code base:
+  - Code organization as R package
+  - The git/GitHub workflow
+  - Automated tests and continous integration
+  - Reproducible research practice
+- Working closely with VE core developers like Brian Gregor and myself being part of the team that helped devising the review criteria helped;
+- Bridging the gap between transportation research and professional practice and leveraging SPR/UTC funding
 
 ---
 
@@ -187,17 +156,6 @@ Data Sources:
 
 - Oregon Department of Transportation (SPR 788) 
 - National Institute for Transportation and Communities (NITC-881)
-- Portland Institute for Computational Science and its resources acquired using NSF Grant #DMS 1624776 and ARO Grant #W911NF-16-1-0307
-
----
-
-background-image: url("resources/Olson2018.png")
-background-size: 80%
-class: center, bottom
-
-Benchmarking Machine Learning Algorithms
-
-Source: Randal S. Olson and William La Cava et al., 2018.
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
@@ -205,8 +163,15 @@ Source: Randal S. Olson and William La Cava et al., 2018.
 "highlightLines": true,
 "countIncrementalSlides": false
 });
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
-(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
