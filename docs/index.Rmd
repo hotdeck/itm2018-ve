@@ -78,6 +78,23 @@ background-size: 75%
 
 ---
 
+# Model Selection
+
+```{r}
+require(tidyverse)
+require(directlabels)
+
+cv <- read_csv("resources/cross-validation.csv")
+#cv <- rename(cv, seg=Segment)
+ggplot(data=cv, aes(x=`kth-fold`, y=rmse, color=`Model Type`)) + geom_line() + 
+  scale_colour_discrete(guide = 'none') +
+  scale_x_discrete(expand=c(0, 1)) +
+  geom_dl(aes(label = `Model Type`), method = "last.qp") +
+  facet_wrap(~Segment, nrow=1)
+```
+
+---
+
 # Elasticities
 
 <!-- I'm not going to show you the usual model estimation results etc here, but just to showcase two examples where I think the new implementation has done a good job -->
