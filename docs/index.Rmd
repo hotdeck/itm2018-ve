@@ -85,11 +85,14 @@ require(tidyverse)
 require(directlabels)
 
 cv <- read_csv("resources/cross-validation.csv")
-#cv <- rename(cv, seg=Segment)
-ggplot(data=cv, aes(x=`kth-fold`, y=rmse, color=`Model Type`)) + geom_line() + 
+cv <- mutate(cv, Segment=factor(Segment, levels=c("UZA", "non-UZA"))) %>% 
+  rename(RMSE=rmse)
+ggplot(data=cv, aes(x=`kth-fold`, y=RMSE, color=`Model Type`)) + geom_line() + 
   scale_colour_discrete(guide = 'none') +
-  scale_x_discrete(expand=c(0, 1)) +
-  geom_dl(aes(label = `Model Type`), method = "last.qp") +
+  #scale_x_discrete(expand=c(0, 1)) +
+  scale_x_continuous(breaks=c(1, 2, 3, 4, 5),
+                     expand=c(0,0.05), limits=c(1,6.5)) +
+geom_dl(aes(label = `Model Type`), method = "last.qp") +
   facet_wrap(~Segment, nrow=1)
 ```
 
