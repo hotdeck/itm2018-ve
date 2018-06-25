@@ -48,7 +48,8 @@ background-size: 100%
 
 # Progress
 
-- Orginally planned to be implemented for the original RSPM/GreenSTEP (ver 3.5)
+- Scope includes review of literature &amp; data, model design and testing, and finally implementation
+- The implementation was orginally planned for RSPM/GreenSTEP (ver 3.5)
 - Modes/models included:
     - Annual Average Daily Vehicle Models Travelled (VMT) model
     - Transit trips (frequency and length) and Person Miles Travelled (PMT)
@@ -58,6 +59,7 @@ background-size: 100%
     - Project working papers and report deliverables
     - A poster presentation at the 2018 TRB annual meeting
     - A manuscript under review for publication at the Journal of Transport and Land Use
+    - TRB ITM 2018
     
 ---
 
@@ -68,12 +70,12 @@ background-size: 75%
 
 # Innovations
 
-- Utilizing a novel dataset of highly detailed information of households (2009 NHTS) and built environment (EPA Smart Location Database) with a US nationwide coverage;
-- Modeling annual average daily Vehicle Miles Traveled (AADVMT), instead of the VMT during the day of the survey commonly used in similar models;
-- Use of cross validation in model development to avoid overfitting;
-- Conducting model selection, in addition to variable selection, in the model development process to select the best model structure among a handful of options;
-- Implemented in the popular statistical programming language R as a self-contained package, which contains documents and functions for model (re-)estimation and prediction;
-- The model development process, from data processing, model estimation, validation and testing, to report and document compiling, follows the best practices of reproducible research; results and products derived from our work, including this ITM paper/presentation, is fully reproducible by others (sans confidential data).
+- Utilizing **a novel nationwide dataset** of highly detailed information of households (2009 NHTS) and built environment (EPA Smart Location Database) with a complete US coverage;
+- Modeling **annual average daily Vehicle Miles Traveled (AADVMT)**, instead of the VMT during the day of the survey commonly used in similar models;
+- Use of **cross validation** in model development to avoid overfitting;
+- Conducting **model selection**, in addition to variable selection, in the model development process to select the best model structure among a handful of options;
+- **Implemented as a self-contained R package for VisionEval**, which contains documents and functions for model (re-)estimation and prediction;
+- The model development process, from data processing, model estimation, validation and testing, to report and document compiling, **follows the best practice of reproducible research**; results and products derived from our work, including this ITM paper/presentation, is fully reproducible by others (sans confidential data).
 
 ---
 
@@ -147,12 +149,12 @@ background-size: 100%
 # Reflections
 
 - The modular VE framework, along with the design principle, sample modules, extensive documentation and coding style guide, is extremely helpful;
-- Best practices we follow (mostly blessings to our team) and facilitate incorporating our code with the VE code base:
-  - Code organization as R package
+- Best practices we follow facilitate incorporating our code with the VE code base:
   - The git/GitHub workflow
   - Automated tests and continous integration
+  - Code organization as R package
   - Reproducible research practice
-- Working closely with VE core developers like Brian Gregor and myself being part of the team that helped devising the review criteria helped;
+- Working closely with VE core developers like Brian Gregor and review team members (Tara Weinder, Ben Stabler, et al) helped tremendously;
 - Bridging the gap between transportation research and professional practice and leveraging SPR/UTC funding
 
 ---
